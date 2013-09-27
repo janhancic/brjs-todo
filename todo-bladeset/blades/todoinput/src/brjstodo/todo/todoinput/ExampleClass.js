@@ -1,14 +1,19 @@
-brjstodo.todo.todoinput.ExampleClass = function()
-{
-	this.message = new caplin.presenter.node.Field( "Hello World!" );	
-};
+caplin.thirdparty( 'caplin-br' );
 
-caplin.extend(brjstodo.todo.todoinput.ExampleClass, caplin.presenter.PresentationModel);
+( function() {
 
-brjstodo.todo.todoinput.ExampleClass.prototype.buttonClicked = function()
-{
- 	var proxy = caplin.core.ServiceRegistry.getService("br.event-service").getProxy("caplin.workbench.model.WorkbenchEventListener", "caplin");
-	proxy.logEvent("button clicked", "", {"greeting" : "Hello!"});
+	var br = require( 'br' );
 
-	console.log( this.message.value.getValue() );
-}
+	function ExampleClass() {
+		this.message = new caplin.presenter.node.Field( "Hello World!" );	
+	};
+
+	br.extend( ExampleClass, caplin.presenter.PresentationModel );
+
+	ExampleClass.prototype.buttonClicked = function() {
+		console.log( this.message.value.getValue() );
+	}
+
+	brjstodo.todo.todoinput.ExampleClass = ExampleClass;
+
+})();

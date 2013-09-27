@@ -1,37 +1,30 @@
 ExampleClassTest = TestCase("ExampleClassTest");
 
-ExampleClassTest.prototype.testTodoItemsBladeListensToItemAddedEvents = function()
-{
-	// setup
-	var stubEventHub = function() {
-		on: function() {
-			this.onArgs = arguments;
-		}
-	};
-	ServiceRegistry.registerService( 'event-hub', stubEventHub );
+caplin.thirdparty( 'caplin-br' );
 
-	var todoItemsBlade = new brjstodo.todo.todoitems.ExampleClass();
-
-	var eventName = this.onArgs[ 0 ]
-	var context = this.onArgs[ 2 ];
-	assertEquals( eventName , 'todo-added' );
-	assertEquals( context , todoItemsBlade );
+var stubEventHub = {
+	on: function( eventName, callback, context ) {
+		this.eventName = eventName;
+		this.callback = callback;
+		this.context = context;
+	}
 };
 
-ExampleClassTest.prototype.testItemsViewModelAddsItemOnTodoAddedEvent() {
+var ServiceRegistry = require( 'br/ServiceRegistry' );
+ServiceRegistry.registerService( 'event-hub', stubEventHub );
 
-	var stubEventHub = function() {
-		on: function( eventName, callback, context ) {
-			this.eventName = eventName;
-			this.callback = callback;
-			this.context = context;
-		}
-	};
-	ServiceRegistry.registerService( 'event-hub', stubEventHub );
+ExampleClassTest.prototype.testTodoItemsBladeListensToItemAddedEvents = function() {
+	var todoItemsBlade = new brjstodo.todo.todoitems.ExampleClass();
+
+	assertEquals( stubEventHub.eventName , 'todo-added' );
+	assertEquals( stubEventHub.context , todoItemsBlade );
+};
+
+ExampleClassTest.prototype.testItemsViewModelAddsItemOnTodoAddedEvent = function() {
 
 	var todoItemsBlade = new brjstodo.todo.todoitems.ExampleClass();
 
-	stubEventHub.callback.apply( stubEventHub.context, { text: 'hello' } );
+	stubEventHub.callback.call( stubEventHub.context, { text: 'hello' } );
 
 	var items = todoItemsBlade.items.getPresentationNodesArray();
 	assertEquals( 'hello', items[ items.length - 1 ].value.getValue() );
