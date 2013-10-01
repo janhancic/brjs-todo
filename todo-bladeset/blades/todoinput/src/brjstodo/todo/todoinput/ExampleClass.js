@@ -4,14 +4,23 @@ caplin.thirdparty( 'caplin-br' );
 
 	var br = require( 'br' );
 
+	var ServiceRegistry = require( 'br/ServiceRegistry' );
+
 	function ExampleClass() {
-		this.message = new caplin.presenter.node.Field( "Hello World!" );	
+		this.message = new caplin.presenter.node.Field( "Hello World!" );
+		this.eventHub = ServiceRegistry.getService( 'event-hub' );
 	};
 
 	br.extend( ExampleClass, caplin.presenter.PresentationModel );
 
 	ExampleClass.prototype.buttonClicked = function() {
-		console.log( this.message.value.getValue() );
+		var todoText = this.message.value.getValue();
+    console.log( todoText );
+
+    // TODO: validate
+
+    this.eventHub.trigger( 'todo-added', { text: todoText } );
+    this.message.value.setValue( '' );
 	}
 
 	brjstodo.todo.todoinput.ExampleClass = ExampleClass;

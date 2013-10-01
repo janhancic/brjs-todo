@@ -1,3 +1,19 @@
+caplin.thirdparty("caplin-br");
+
+var Emitter = require( 'Emitter' );
+var ServiceRegistry = require( 'br/ServiceRegistry' );
+
+function MyEmitter() {};
+Emitter.mixInto(MyEmitter);
+
+MyEmitter.prototype.trigger = function() {
+	console.log( arguments );
+	Emitter.prototype.trigger.apply( this, arguments );
+};
+
+var emitter = new MyEmitter();
+ServiceRegistry.registerService( 'event-hub', emitter );
+
 // TODO: the app code for this should be moved into the index.html and the reigistry code should not be using a test version
 brjstodo.todo.todoinput.workbench.ExampleBladeApplication = function(nComponentWidth, nComonentHeight)
 {
