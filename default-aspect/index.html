@@ -9,6 +9,12 @@
 		<@js.bundle@/>
 		
 		<script>
+			caplin.thirdparty('br-caplin');
+
+			var ServiceRegistry = require( 'br/ServiceRegistry' );
+			var DemoEventHub = require( 'br/DemoEventHub' );
+			ServiceRegistry.registerService( 'demo-event-hub', new DemoEventHub() );
+
 			var oApp = new brjstodo.App();
 		</script>
 	</head>

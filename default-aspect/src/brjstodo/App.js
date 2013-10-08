@@ -1,4 +1,10 @@
-brjstodo.App = function()
-{
-	// your app goes here
-};
+caplin.thirdparty( 'caplin-br' );
+
+( function() {
+
+  var App = function() {
+  };
+
+  brjstodo.App = App;
+
+} )();

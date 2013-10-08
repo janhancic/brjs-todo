@@ -6,16 +6,17 @@ caplin.thirdparty("caplin-br");
 	var ServiceRegistry = require( 'br/ServiceRegistry' );
 
 	function ExampleClass() {
-		var DisplayField = caplin.presenter.node.DisplayField;
-		this.items = new caplin.presenter.node.NodeList( [ new DisplayField( "foo" ), new DisplayField( "bar" ) ] );
+		var DisplayField = br.presenter.node.DisplayField;
+		var NodeList = br.presenter.node.NodeList;
+		this.items = new NodeList( [ new DisplayField( "foo" ), new DisplayField( "bar" ) ] );
 
-		this.eventHub = ServiceRegistry.getService( 'event-hub' );
-		this.eventHub.on( 'todo-added', this._todoAdded, this );
+		this.eventHub = ServiceRegistry.getService( 'demo-event-hub' );
+		this.eventHub.channel( 'todo-list' ).on( 'todo-added', this._todoAdded, this );
 	};
-	br.extend(ExampleClass, caplin.presenter.PresentationModel);
+	br.extend( ExampleClass, br.presenter.PresentationModel );
 
 	ExampleClass.prototype._todoAdded = function( added ) {
-		var DisplayField = caplin.presenter.node.DisplayField;
+		var DisplayField = br.presenter.node.DisplayField;
 		var newItem = new DisplayField( added.text );
 
 		var nodes = this.items.getPresentationNodesArray();

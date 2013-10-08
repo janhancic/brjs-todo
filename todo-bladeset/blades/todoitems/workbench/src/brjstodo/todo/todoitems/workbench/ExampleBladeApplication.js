@@ -1,8 +1,3 @@
-caplin.thirdparty("caplin-br");
-
-var Emitter = require( 'Emitter' );
-var ServiceRegistry = require( 'br/ServiceRegistry' );
-
 // TODO: the app code for this should be moved into the index.html and the reigistry code should not be using a test version
 brjstodo.todo.todoitems.workbench.ExampleBladeApplication = function(nComponentWidth, nComonentHeight)
 {
@@ -11,17 +6,6 @@ brjstodo.todo.todoitems.workbench.ExampleBladeApplication = function(nComponentW
 
 	this.m_nComponentWidth = nComponentWidth;
 	this.m_nComonentHeight = nComonentHeight;
-
-	function MyEmitter() {};
-  Emitter.mixInto(MyEmitter);
-  var oldTrigger = MyEmitter.prototype.trigger;
-  MyEmitter.prototype.trigger = function() {
-  	console.log( arguments );
-  	oldTrigger.apply( this, arguments );
-  };
-
-  var emitter = new MyEmitter();
-	ServiceRegistry.registerService( 'event-emitter', emitter );
 
 	this._createPresenterComponents();
 };
