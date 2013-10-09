@@ -8,6 +8,11 @@
 		<@css.bundle theme="standard"@/>
 		<@js.bundle@/>
 		
+	</head>
+	<body>
+
+		<section id="todoapp"></section>
+
 		<script>
 			caplin.thirdparty('br-caplin');
 
@@ -17,8 +22,6 @@
 
 			var oApp = new brjstodo.App();
 		</script>
-	</head>
-	<body>
-		@SUCCESS.MESSAGE.JNDI.TOKEN@
+
 	</body>
 </html>
