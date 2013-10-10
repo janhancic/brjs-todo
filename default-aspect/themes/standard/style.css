@@ -1,7 +1,23 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding-top: 30px;
+  background: #eaeaea url('bg.png');
+  color: #4d4d4d;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
 #todoapp {
   background: #fff;
   background: rgba(255, 255, 255, 0.9);
-  margin: 130px 0 40px 0;
   border: 1px solid #ccc;
   position: relative;
   border-top-left-radius: 2px;
@@ -45,11 +61,6 @@
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -ms-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
 }
 
 .todo-list li {
